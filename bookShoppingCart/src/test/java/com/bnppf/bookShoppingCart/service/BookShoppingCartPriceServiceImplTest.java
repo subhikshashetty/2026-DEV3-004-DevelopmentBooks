@@ -34,4 +34,26 @@ public class BookShoppingCartPriceServiceImplTest {
         double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER));
         assertEquals(100.0, result);
     }
+
+    @Test
+    void getBookCartPriceForTwoBooksWithDiscount5Percent() {
+        Double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER));
+        assertEquals(95.0, result);
+    }
+    @Test
+    void getBookCartPriceForThreeBooksWithDiscount10Percent() {
+        Double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER, Book.CLEAN_ARCHITECTURE));
+        assertEquals(135.0, result);
+    }
+    @Test
+    void getBookCartPriceForFourBooksWithDiscount20Percent() {
+        Double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER, Book.CLEAN_ARCHITECTURE, Book.TEST_DRIVEN_DEVELOPMENT_BY_EXAMPLE));
+        assertEquals(160.0, result);
+    }
+    @Test
+    void getBookCartPriceForAllBooksWithDiscount25Percent() {
+        Double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER, Book.CLEAN_ARCHITECTURE, Book.TEST_DRIVEN_DEVELOPMENT_BY_EXAMPLE,Book.WORKING_EFFECTIVELY_WITH_LEGACY_CODE));
+        assertEquals(187.5, result);
+    }
+
 }
