@@ -30,7 +30,7 @@ public class ShoppingCartControllerTest {
 
         String requestJson = """
                 {
-                  "books": ["CLEAN_CODE", "THE_CLEAN_CODER"]
+                  "books": ["CLEAN_CODE", "CLEAN_CODER"]
                 }
                 """;
 
