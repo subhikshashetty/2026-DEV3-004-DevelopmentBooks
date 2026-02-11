@@ -62,4 +62,10 @@ public class BookShoppingCartPriceServiceImplTest {
         assertEquals(320.0, result);
     }
 
+    @Test
+    void getBookCartPriceFor2SameSet() {
+        Double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE,Book.CLEAN_CODE));
+        assertEquals(100.0, result);
+    }
+
 }
