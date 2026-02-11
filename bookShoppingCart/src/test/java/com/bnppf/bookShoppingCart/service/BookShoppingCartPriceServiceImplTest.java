@@ -56,4 +56,10 @@ public class BookShoppingCartPriceServiceImplTest {
         assertEquals(190.0, result);
     }
 
+    @Test
+    void getBookCartPriceForMultipleSetDiscount() {
+        Double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE,Book.CLEAN_CODE,Book.CLEAN_CODER, Book.CLEAN_CODER, Book.CLEAN_ARCHITECTURE, Book.CLEAN_ARCHITECTURE,  Book.TEST_DRIVEN_DEVELOPMENT_BY_EXAMPLE, Book.WORKING_EFFECTIVELY_WITH_LEGACY_CODE));
+        assertEquals(320.0, result);
+    }
+
 }
