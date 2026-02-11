@@ -1,0 +1,46 @@
+package com.bnppf.bookShoppingCart.controller;
+
+
+import com.bnppf.bookShoppingCart.service.BookShoppingCartPriceService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(ShoppingCartController.class)
+@AutoConfigureMockMvc
+public class ShoppingCartControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockitoBean
+    private BookShoppingCartPriceService bookShoppingCartPriceService;
+
+    @Test
+    void shouldReturnTotalWhenRequestIsValid() throws Exception {
+
+        String requestJson = """
+                {
+                  "books": ["CLEAN_CODE", "THE_CLEAN_CODER"]
+                }
+                """;
+
+        when(bookShoppingCartPriceService.calculateTotalPrice(org.mockito.ArgumentMatchers.anyList()))
+                .thenReturn(95.0);
+
+        mockMvc.perform(post("/api/bookprice/total")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestJson))
+                .andExpect(status().isOk())
+                .andExpect(content().string("95.0"));
+    }
+}
