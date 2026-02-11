@@ -67,5 +67,4 @@ public class BookShoppingCartPriceServiceImplTest {
         Double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE,Book.CLEAN_CODE));
         assertEquals(100.0, result);
     }
-
 }
