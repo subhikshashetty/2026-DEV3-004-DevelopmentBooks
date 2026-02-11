@@ -13,6 +13,10 @@ public class BookShoppingCartPriceServiceImpl implements BookShoppingCartPriceSe
         if (books == null || books.isEmpty()) {
             return 0.0;
         }
-        return 0.0;
+        return books.stream().mapToDouble(this::getPriceForEachBook).sum();
+    }
+
+    private double getPriceForEachBook(Book book) {
+       return book.getPrice();
     }
 }
