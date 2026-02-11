@@ -30,12 +30,6 @@ public class BookShoppingCartPriceServiceImplTest {
     }
 
     @Test
-    void getBookCartPriceForTwoBooksWithOutDiscount() {
-        double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER));
-        assertEquals(100.0, result);
-    }
-
-    @Test
     void getBookCartPriceForTwoBooksWithDiscount5Percent() {
         Double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER));
         assertEquals(95.0, result);
