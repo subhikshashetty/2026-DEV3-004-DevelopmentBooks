@@ -13,6 +13,6 @@ public class BookShoppingCartPriceServiceImpl implements BookShoppingCartPriceSe
         if (books == null || books.isEmpty()) {
             return 0.0;
         }
-        return 50.0;
+        return 0.0;
     }
 }
