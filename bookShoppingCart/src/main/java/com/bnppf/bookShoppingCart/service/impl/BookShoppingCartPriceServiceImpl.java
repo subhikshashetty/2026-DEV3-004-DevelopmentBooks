@@ -4,7 +4,10 @@ import com.bnppf.bookShoppingCart.enums.Book;
 import com.bnppf.bookShoppingCart.service.BookShoppingCartPriceService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BookShoppingCartPriceServiceImpl implements BookShoppingCartPriceService {
@@ -18,7 +21,22 @@ public class BookShoppingCartPriceServiceImpl implements BookShoppingCartPriceSe
         if (books.size() == 1) {
             return BASE_BOOK_PRICE;
         } else {
-            totalPrice = calculateDiscountPrice(books);
+            Map<Book, Integer> bookCountsByTitle = new HashMap<>();
+            List<List<Book>> groupedBooks = new ArrayList<>();
+            for (Book book : books) {
+                bookCountsByTitle.put(book, bookCountsByTitle.getOrDefault(book, 0) + 1);
+            }
+            while (!bookCountsByTitle.isEmpty()) {
+                List<Book> group = new ArrayList<>();
+                for (Book books1 : new ArrayList<>(bookCountsByTitle.keySet())) {
+                    group.add(books1);
+                    decrementOrRemove(books1, bookCountsByTitle);
+                }
+                groupedBooks.add(group);
+            }
+            totalPrice =  groupedBooks.stream()
+                    .mapToDouble(this::calculateDiscountPrice)
+                    .sum();
         }
         return totalPrice;
     }
@@ -36,5 +54,12 @@ public class BookShoppingCartPriceServiceImpl implements BookShoppingCartPriceSe
             case 1 -> BASE_BOOK_PRICE;
             default -> 0;
         };
+    }
+
+    private static void decrementOrRemove(Book title, Map<Book, Integer> map) {
+        map.computeIfPresent(title, (k, v) -> v - 1);
+        if (map.get(title) != null && map.get(title) <= 0) {
+            map.remove(title);
+        }
     }
 }
