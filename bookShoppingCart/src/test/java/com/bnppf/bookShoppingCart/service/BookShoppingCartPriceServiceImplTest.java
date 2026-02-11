@@ -22,4 +22,16 @@ public class BookShoppingCartPriceServiceImplTest {
         double result = bookShoppingCartPriceService.calculateTotalPrice(List.of());
         assertEquals(0.0, result);
     }
+
+    @Test
+    void getBookCartPriceForSingleBook() {
+        double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE));
+        assertEquals(50.0, result);
+    }
+
+    @Test
+    void getBookCartPriceForTwoBooksWithOutDiscount() {
+        double result = bookShoppingCartPriceService.calculateTotalPrice(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER));
+        assertEquals(100.0, result);
+    }
 }
