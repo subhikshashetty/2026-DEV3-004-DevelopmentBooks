@@ -1,6 +1,8 @@
 package com.bnppf.bookShoppingCart.util;
 
 import com.bnppf.bookShoppingCart.enums.Book;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,7 +12,10 @@ import java.util.Map;
 
 @Component
 public class BookCollectionAggregator {
+    private static final Logger logger = LoggerFactory.getLogger(BookCollectionAggregator.class);
+
     public static List<List<Book>> getBookCollection(List<Book> bookCollection) {
+        logger.trace("getBookCollection() method start");
         Map<Book, Integer> bookCountsByTitle = new HashMap<>();
         List<List<Book>> groupedBooks = new ArrayList<>();
         for (Book book : bookCollection) {
@@ -24,19 +29,24 @@ public class BookCollectionAggregator {
             }
             groupedBooks.add(group);
         }
+        logger.debug("groupedBooks before optimizing: {}", groupedBooks);
         getOptimalGroups(groupedBooks);
+        logger.trace("getBookCollection() method end");
         return groupedBooks;
     }
 
     private static void decrementOrRemove(Book title, Map<Book, Integer> map) {
+        logger.trace("decrementOrRemove() method start");
         map.computeIfPresent(title, (k, v) -> v - 1);
         if (map.get(title) != null && map.get(title) <= 0) {
             map.remove(title);
         }
+        logger.trace("decrementOrRemove() method end");
     }
 
     //This method will check the group size, If the group size is 5 or 3 change it to 4 and 4 which is optimal
     private static void getOptimalGroups(List<List<Book>> groupedBooks) {
+        logger.trace("getOptimalGroups() method start");
         int indexOfGroupSizeFive = -1;
         int indexOfGroupSizeThree = -1;
         for (int i = 0; i < groupedBooks.size(); i++) {
@@ -49,6 +59,7 @@ public class BookCollectionAggregator {
         }
 
         if (indexOfGroupSizeFive != -1 && indexOfGroupSizeThree != -1) {
+            logger.debug("Books group has a size of 5 and 3. Hence rearranging  to 4 and 4");
             List<Book> groupSixeFiveList = groupedBooks.get(indexOfGroupSizeFive);
             List<Book> groupSixeThisList = groupedBooks.get(indexOfGroupSizeThree);
 
@@ -62,5 +73,7 @@ public class BookCollectionAggregator {
                 }
             }
         }
+        logger.debug("OptimalGroups size is: {}", groupedBooks);
+        logger.trace("getOptimalGroups() method end");
     }
 }
