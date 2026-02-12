@@ -14,6 +14,13 @@ import java.util.Map;
 public class BookCollectionAggregator {
     private static final Logger logger = LoggerFactory.getLogger(BookCollectionAggregator.class);
 
+    /**
+     * Organizes a collection of books into grouped subsets.
+     *
+     * @param bookCollection the list of books to be grouped; must not be null
+     * @return a list of grouped books, where each inner list represents
+     * a collection of books formed according to the grouping logic
+     */
     public static List<List<Book>> getBookCollection(List<Book> bookCollection) {
         logger.trace("getBookCollection() method start");
         Map<Book, Integer> bookCountsByTitle = new HashMap<>();
@@ -35,6 +42,16 @@ public class BookCollectionAggregator {
         return groupedBooks;
     }
 
+    /**
+     * Decreases the quantity of the specified book in the given map.
+     *
+     * <p>If the book exists in the map, its quantity is reduced by one.
+     * If the quantity becomes zero after decrementing, the book is
+     * removed from the map entirely.</p>
+     *
+     * @param title the book whose quantity should be decreased
+     * @param map   the map containing books as keys and their quantities as values
+     */
     private static void decrementOrRemove(Book title, Map<Book, Integer> map) {
         logger.trace("decrementOrRemove() method start");
         map.computeIfPresent(title, (k, v) -> v - 1);
@@ -44,7 +61,16 @@ public class BookCollectionAggregator {
         logger.trace("decrementOrRemove() method end");
     }
 
-    //This method will check the group size, If the group size is 5 or 3 change it to 4 and 4 which is optimal
+    /**
+     * Optimizes book groups for better pricing.
+     *
+     * <p>If the grouped books contain one group of size 5 and another
+     * group of size 3, this method restructures them into two groups
+     * of size 4 and 4, which results in a more optimal discount
+     * calculation.</p>
+     *
+     * @param groupedBooks the list of book groups to be evaluated and optimized
+     */
     private static void getOptimalGroups(List<List<Book>> groupedBooks) {
         logger.trace("getOptimalGroups() method start");
         int indexOfGroupSizeFive = -1;

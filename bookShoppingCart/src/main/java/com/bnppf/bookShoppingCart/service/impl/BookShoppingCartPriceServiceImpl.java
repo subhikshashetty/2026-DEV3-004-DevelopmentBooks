@@ -26,6 +26,12 @@ public class BookShoppingCartPriceServiceImpl implements BookShoppingCartPriceSe
     }
 
 
+    /**
+     * Calculates the total price of a list of books.
+     *
+     * @param books the list of books whose total price is to be calculated;
+     * @return the total price of all books in the list
+     */
     @Override
     public double calculateTotalPrice(List<Book> books) {
         logger.trace("calculateTotalPrice() method start");
@@ -49,6 +55,13 @@ public class BookShoppingCartPriceServiceImpl implements BookShoppingCartPriceSe
         return totalPrice;
     }
 
+    /**
+     * Calculates the total price of the given list of books after applying discounts.
+     *
+     * @param books the list of books for which the discounted total price
+     *              should be calculated
+     * @return the total price after all applicable discounts have been applied
+     */
     private double calculateDiscountPrice(List<Book> books) {
         logger.trace("calculateDiscountPrice() method start");
         if (!books.isEmpty()) {
