@@ -1,6 +1,6 @@
 # Development Books Kata - TDD with Spring Boot
 
-This project is a **Test-Driven Development (TDD) Kata** built with **Java 17** and **Spring Boot**. It demonstrates the use of TDD principles to solve a pricing algorithm challenge using a RESTful API, along with integrated **Swagger UI** for testing.
+This project is a **Test-Driven Development (TDD) Kata** built with **Java 21** and **Spring Boot**. It demonstrates the use of TDD principles to solve a pricing algorithm challenge using a RESTful API, along with integrated **Swagger UI** for testing.
 
 ---
 
