@@ -22,6 +22,14 @@ public class ShoppingCartController {
         this.bookShoppingCartPriceService = bookShoppingCartPriceService;
     }
 
+    /**
+     * Calculates and returns the total price of books in the shopping cart.
+     *
+     * @param books the shopping cart request containing the list of books
+     *              for which the total price should be calculated
+     * @return a {@link ResponseEntity} containing the total calculated price
+     * as a Double and the appropriate HTTP status code
+     */
     @PostMapping("total")
     @Operation(
             summary = "Calculate total price",
