@@ -30,11 +30,11 @@ If books are repeated, they may be grouped in such a way that maximizes discount
 #### 💡 Example
 
 Basket:
-- 2 × Clean Code
-- 2 × The Clean Coder
-- 2 × Clean Architecture
-- 1 × TDD by Example
-- 1 × Working Effectively with Legacy Code
+- 2 copies of the “Clean Code” book
+- 2 copies of the “Clean Coder” book
+- 2 copies of the “Clean Architecture” book
+- 1 copy of the “Test Driven Development by Example” book
+- 1 copy of the “Working effectively with Legacy Code” book
 
 Optimal grouping:
 - Group 1: 4 books = 20% discount
@@ -53,12 +53,12 @@ Total = €320
 - Java 21
 - Maven 3.x
 - Spring Boot 4.0.2
-- 
 ---
 
 
 ## How to Run
 - First Clone the repository https://github.com/subhikshashetty/2026-DEV3-004-DevelopmentBooks.git
+- Redirect to the folder **bookShoppingCart**
 
 ```bash
 # Build the project
@@ -88,8 +88,11 @@ mvn spring-boot:run
      MediaType : JSON
      EndPoint : http://localhost:8080//api/bookprice/total
 
+--- 
+
+### Sample requests
+
   - The sample request for this getTotalPrice are available under
   `src/main/resources`, at the root of the project.
    
 
---
